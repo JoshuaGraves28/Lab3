@@ -43,16 +43,21 @@
         app:layout_constraintGuide_begin="659dp" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/outputView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="end"
+        android:text="@string/_0"
+        android:textAlignment="viewEnd"
+        app:layout_constraintBottom_toTopOf="@+id/nineButton"
         app:layout_constraintEnd_toStartOf="@+id/rightGuide"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/leftGuide"
-        app:layout_constraintTop_toTopOf="@+id/topGuide" />
+        app:layout_constraintTop_toTopOf="@+id/topGuide"
+        app:layout_constraintVertical_bias="0.77" />
 
     <Button
         android:id="@+id/clearButton"
@@ -65,7 +70,8 @@
         app:layout_constraintEnd_toStartOf="@+id/rightGuide"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/sqrtButton"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toTopOf="@+id/topGuide"
+        app:layout_constraintVertical_bias="0.5" />
 
     <Button
         android:id="@+id/sqrtButton"
@@ -78,7 +84,7 @@
         app:layout_constraintEnd_toStartOf="@+id/clearButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/nineButton"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toTopOf="@+id/topGuide" />
 
     <Button
         android:id="@+id/nineButton"
@@ -91,7 +97,7 @@
         app:layout_constraintEnd_toStartOf="@+id/sqrtButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/eightButton"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toTopOf="@+id/topGuide" />
 
     <Button
         android:id="@+id/eightButton"
@@ -104,7 +110,7 @@
         app:layout_constraintEnd_toStartOf="@+id/nineButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/sevenButton"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toTopOf="@+id/topGuide" />
 
     <Button
         android:id="@+id/sevenButton"
@@ -117,7 +123,7 @@
         app:layout_constraintEnd_toStartOf="@+id/eightButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/leftGuide"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toTopOf="@+id/topGuide" />
 
     <Button
         android:id="@+id/percentButton"
