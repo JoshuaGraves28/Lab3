@@ -100,15 +100,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (view.getId()) {
             case R.id.zeroButton:
-                String buttonzeroText =(zeroButton).getText().toString();
-                s.append(buttonzeroText);
+                s.append((zeroButton).getText().toString());
                 outputView.setText(s.toString());
                 break;
             case R.id.oneButton:
-                String buttononeText =(oneButton).getText().toString();
-                s.append(buttononeText);
-                outputView.setText((s.toString()));
 
+                s.append((oneButton).getText().toString());
+                outputView.setText((s.toString()));
+                break;
+            case R.id.twoButton:
+
+                s.append((twoButton).getText().toString());
+                outputView.setText(s);
+                break;
+            case R.id.threeButton:
+
+                s.append((threeButton).getText().toString());
+                outputView.setText(s);
+                break;
+            case R.id.fourButton:
+                s.append((fourButton).getText().toString());
+                outputView.setText(s);
+                break;
+            case R.id.fiveButton:
+                s.append((fiveButton).getText().toString());
+                outputView.setText(s);
+                break;
+            case R.id.sixButton:
+                s.append((sixButton).getText().toString());
+                outputView.setText(s);
+                break;
+            case R.id.sevenButton:
+                s.append((sevenButton).getText().toString());
+                outputView.setText(s);
+                break;
         }
     }
     @Override
