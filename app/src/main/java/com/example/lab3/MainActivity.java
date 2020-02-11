@@ -14,6 +14,10 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
+import java.math.BigDecimal;
+import java.math.*;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     TextView outputView;
 
@@ -39,6 +43,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button clearButton;
 
     StringBuilder s = new StringBuilder();
+    String[] operation= {"0"};
+    BigDecimal var1;
+    BigDecimal var2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+
         outputView=(TextView)findViewById(R.id.outputView);
 
     }
@@ -134,7 +143,98 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 s.append((sevenButton).getText().toString());
                 outputView.setText(s);
                 break;
+            case R.id.eightButton:
+                s.append((eightButton).getText().toString());
+                outputView.setText(s);
+                break;
+            case R.id.nineButton:
+                s.append((nineButton).getText().toString());
+                outputView.setText(s);
+                break;
+            case R.id.signButton:
+                break;
+            case R.id.plusButton:
+                operation[0]="plus";
+                var1=new BigDecimal(s.toString());
+                s= new StringBuilder();
+                break;
+            case R.id.minusButton:
+                operation[0]="minus";
+                var1=new BigDecimal(s.toString());
+                s= new StringBuilder();
+                break;
+            case R.id.timesButton:
+                operation[0]="multiply";
+                var1=new BigDecimal(s.toString());
+                s= new StringBuilder();
+                break;
+            case R.id.divideButton:
+                operation[0]="divide";
+                var1=new BigDecimal(s.toString());
+                s= new StringBuilder();
+                break;
+            case R.id.percentButton:
+                operation[0]="percent";
+                var1=new BigDecimal(s.toString());
+                var2=new BigDecimal("100");
+                String pOutput=((var1.divide(var2)).toString());
+                outputView.setText(pOutput);
+                s=new StringBuilder();
+                break;
+            case R.id.sqrtButton:
+                operation[0]="sqrt";
+                var1=new BigDecimal(s.toString());
+                var2=new BigDecimal(Math.pow(var1.doubleValue(), .5));
+
+                String sqrtOutput=((var2).toString());
+                outputView.setText(sqrtOutput);
+
+                s=new StringBuilder();
+                break;
+
+            case R.id.equalButton:
+                String result= operation(operation,var1,s);
+                outputView.setText(result);
+                s=new StringBuilder();
+                operation[0]=null;
+
+
+
         }
+    }
+
+    public String operation(String[] a, BigDecimal var1,StringBuilder s) {
+        String answer;
+
+        if (a[0] == "plus") {
+            var2 = new BigDecimal(s.toString());
+            answer = ((var1.add(var2)).toString());
+
+        }
+        else if (a[0] == "minus") {
+            var2 = new BigDecimal(s.toString());
+            answer = ((var1.subtract(var2)).toString());
+
+        }
+        else if (a[0] == "multiply") {
+            var2 = new BigDecimal(s.toString());
+            answer = ((var1.multiply(var2)).toString());
+
+        }
+        else if (a[0] == "divide") {
+            var2 = new BigDecimal(s.toString());
+            answer = ((var1.divide(var2)).toString());
+        }
+        else if (a[0] == "percent") {
+
+            answer = var1.toString();
+        }
+        else{
+            var2=new BigDecimal(Math.pow(var1.doubleValue(), .5));
+            answer=var2.toString();
+        }
+        
+        return answer;
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
