@@ -17,6 +17,7 @@ import android.widget.TextView;
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.*;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     TextView outputView;
@@ -43,10 +44,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button clearButton;
 
     StringBuilder s = new StringBuilder();
-    String[] operation= {"0"};
-    BigDecimal var1;
-    BigDecimal var2;
-
+    boolean lhs = false;
+    boolean rhs = false;
+    BigDecimal left;
+    BigDecimal right;
+    String operation;
+    String answer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,16 +157,64 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.signButton:
                 break;
             case R.id.plusButton:
-                operation[0]="plus";
-                var1=new BigDecimal(s.toString());
-                s= new StringBuilder();
+                operation ="plus";
+                if (s.length()== 0){
+                    lhs = false;
+                    s.append(left);
+                }
+                if(lhs == false){
+                    left = new BigDecimal(s.toString());
+                    lhs = true;
+                    s = new StringBuilder();
+                    outputView.setText(s);
+
+                }
+                else if(lhs == true && rhs ==false){
+                    right = new BigDecimal(s.toString());
+                    rhs = true;
+                    left = ((left.add(right)));
+                    outputView.setText(left.toString());
+                    s = new StringBuilder();
+                }
+                else if(lhs == true && rhs == true){
+                    right = new BigDecimal(s.toString());
+                    left = ((left.add(right)));
+                    outputView.setText(left.toString());
+                    s = new StringBuilder();
+                }
+
                 break;
             case R.id.minusButton:
-                operation[0]="minus";
-                var1=new BigDecimal(s.toString());
-                s= new StringBuilder();
+                 operation ="minus";
+                if (s.length()== 0){
+                    lhs = false;
+                    s.append(left);
+                }
+                 if(lhs == false){
+                    left = new BigDecimal(s.toString());
+                    lhs = true;
+
+                    s = new StringBuilder();
+                    outputView.setText(s);
+
+
+                }
+                else if(lhs == true && rhs ==false){
+
+                    right = new BigDecimal(s.toString());
+                    rhs = true;
+                    left = ((left.subtract(right)));
+                    outputView.setText(left.toString());
+                    s = new StringBuilder();
+                }
+                else if(lhs == true && rhs == true){
+                    right = new BigDecimal(s.toString());
+                    left = ((left.subtract(right)));
+                    outputView.setText(left.toString());
+                    s = new StringBuilder();
+                }
                 break;
-            case R.id.timesButton:
+            /*case R.id.timesButton:
                 operation[0]="multiply";
                 var1=new BigDecimal(s.toString());
                 s= new StringBuilder();
@@ -191,51 +242,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 s=new StringBuilder();
                 break;
-
+*/
             case R.id.equalButton:
-                String result= operation(operation,var1,s);
-                outputView.setText(result);
+
+                if(operation == "plus"){
+                    if(rhs==false){
+                        right= new BigDecimal(s.toString());
+                    }
+                    left = ((left.add(right)));
+                    outputView.setText(left.toString());
+                    s= new StringBuilder();
+                }
+                if(operation == "minus"){
+                    if(rhs==false){
+                        right= new BigDecimal(s.toString());
+                    }
+                    left = ((left.subtract(right)));
+                    outputView.setText(left.toString());
+
+                   s= new StringBuilder();
+
+                }
                 s=new StringBuilder();
-                operation[0]=null;
-
+                break;
 
 
         }
     }
 
-    public String operation(String[] a, BigDecimal var1,StringBuilder s) {
-        String answer;
 
-        if (a[0] == "plus") {
-            var2 = new BigDecimal(s.toString());
-            answer = ((var1.add(var2)).toString());
-
-        }
-        else if (a[0] == "minus") {
-            var2 = new BigDecimal(s.toString());
-            answer = ((var1.subtract(var2)).toString());
-
-        }
-        else if (a[0] == "multiply") {
-            var2 = new BigDecimal(s.toString());
-            answer = ((var1.multiply(var2)).toString());
-
-        }
-        else if (a[0] == "divide") {
-            var2 = new BigDecimal(s.toString());
-            answer = ((var1.divide(var2)).toString());
-        }
-        else if (a[0] == "percent") {
-
-            answer = var1.toString();
-        }
-        else{
-            var2=new BigDecimal(Math.pow(var1.doubleValue(), .5));
-            answer=var2.toString();
-        }
-        
-        return answer;
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
