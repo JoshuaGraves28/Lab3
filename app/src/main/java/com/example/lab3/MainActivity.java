@@ -245,7 +245,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 */
             case R.id.equalButton:
 
-                if(operation == "plus"){
+                if(operation.equals("plus")){
                     if(rhs==false){
                         right= new BigDecimal(s.toString());
                     }
@@ -253,7 +253,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     outputView.setText(left.toString());
                     s= new StringBuilder();
                 }
-                if(operation == "minus"){
+                if(operation.equals("minus")){
                     if(rhs==false){
                         right= new BigDecimal(s.toString());
                     }
@@ -263,7 +263,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                    s= new StringBuilder();
 
                 }
-                s=new StringBuilder();
+                rhs=false;
                 break;
 
 
