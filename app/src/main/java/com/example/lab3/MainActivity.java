@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     BigDecimal right;
     String operation;
     String answer;
+    int signcounter=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,8 +155,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 s.append((nineButton).getText().toString());
                 outputView.setText(s);
                 break;
-            case R.id.signButton:
-                break;
             case R.id.plusButton:
                 operation ="plus";
                 if (s.length()== 0){
@@ -214,35 +213,113 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     s = new StringBuilder();
                 }
                 break;
-            /*case R.id.timesButton:
-                operation[0]="multiply";
-                var1=new BigDecimal(s.toString());
-                s= new StringBuilder();
+            case R.id.timesButton:
+                operation ="times";
+                if (s.length()== 0){
+                    lhs = false;
+                    s.append(left);
+                }
+                if(lhs == false){
+                    left = new BigDecimal(s.toString());
+                    lhs = true;
+
+                    s = new StringBuilder();
+                    outputView.setText(s);
+
+
+                }
+                else if(lhs == true && rhs ==false){
+
+                    right = new BigDecimal(s.toString());
+                    rhs = true;
+                    left = ((left.multiply(right)));
+                    outputView.setText(left.toString());
+                    s = new StringBuilder();
+                }
+                else if(lhs == true && rhs == true){
+                    right = new BigDecimal(s.toString());
+                    left = ((left.multiply(right)));
+                    outputView.setText(left.toString());
+                    s = new StringBuilder();
+                }
                 break;
             case R.id.divideButton:
-                operation[0]="divide";
-                var1=new BigDecimal(s.toString());
-                s= new StringBuilder();
+                operation ="divide";
+                if (s.length()== 0){
+                    lhs = false;
+                    s.append(left);
+                }
+                if(lhs == false){
+                    left = new BigDecimal(s.toString());
+                    lhs = true;
+
+                    s = new StringBuilder();
+                    outputView.setText(s);
+
+
+                }
+                else if(lhs == true && rhs ==false){
+
+                    right = new BigDecimal(s.toString());
+                    rhs = true;
+                    left = ((left.divide(right)));
+                    outputView.setText(left.toString());
+                    s = new StringBuilder();
+                }
+                else if(lhs == true && rhs == true){
+                    right = new BigDecimal(s.toString());
+                    left = ((left.divide(right)));
+                    outputView.setText(left.toString());
+                    s = new StringBuilder();
+                }
                 break;
             case R.id.percentButton:
-                operation[0]="percent";
-                var1=new BigDecimal(s.toString());
-                var2=new BigDecimal("100");
-                String pOutput=((var1.divide(var2)).toString());
-                outputView.setText(pOutput);
+                left= new BigDecimal(s.toString());
+                BigDecimal percentage = new BigDecimal("100");
+                left=(left.divide(percentage));
+                outputView.setText(left.toString());
                 s=new StringBuilder();
                 break;
             case R.id.sqrtButton:
-                operation[0]="sqrt";
-                var1=new BigDecimal(s.toString());
-                var2=new BigDecimal(Math.pow(var1.doubleValue(), .5));
+                left= new BigDecimal(s.toString());
+                String number = left.toString();
+                Double use = Double.parseDouble(number);
 
-                String sqrtOutput=((var2).toString());
-                outputView.setText(sqrtOutput);
-
+                left=new BigDecimal((Math.pow(use, 0.5)));
+                outputView.setText(left.toString());
                 s=new StringBuilder();
                 break;
-*/
+            case R.id.signButton:
+                ++signcounter;
+                if(signcounter % 2 ==1){
+                    StringBuilder t = new StringBuilder();
+                    t.append("-");
+                    left= new BigDecimal(s.toString());
+                    s = new StringBuilder();
+                    s.append(t);
+                    s.append(left.toString());
+                   outputView.setText(s);
+                }
+                else{
+                    s.deleteCharAt(0);
+                    outputView.setText(s);
+                }
+                break;
+            case R.id.decimalButton:
+                s.append((decimalButton).getText().toString());
+                outputView.setText(s);
+                break;
+            case R.id.clearButton:
+                operation="";
+                s=new StringBuilder();
+                lhs = false;
+                rhs=false;
+                right=new BigDecimal("0");
+                left=new BigDecimal("0");
+                outputView.setText(s);
+                signcounter=0;
+                break;
+
             case R.id.equalButton:
 
                 if(operation.equals("plus")){
@@ -263,7 +340,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                    s= new StringBuilder();
 
                 }
+                if(operation.equals("times")){
+                    if(rhs==false){
+                        right= new BigDecimal(s.toString());
+                    }
+                    left = ((left.multiply(right)));
+                    outputView.setText(left.toString());
+
+                    s= new StringBuilder();
+
+                }
+                if(operation.equals("divide")){
+                    if(rhs==false){
+                        right= new BigDecimal(s.toString());
+                    }
+                    left = ((left.divide(right)));
+                    outputView.setText(left.toString());
+
+                    s= new StringBuilder();
+
+                }
                 rhs=false;
+                signcounter=0;
                 break;
 
 
